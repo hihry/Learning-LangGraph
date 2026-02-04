@@ -1,0 +1,20 @@
+[project]
+name = "reflexionagent"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "hihry",email = "work.himanshu.r.v@gmail.com"}
+]
+requires-python = ">=3.13,<4.0"
+dependencies = [
+    "black (>=26.1.0,<27.0.0)",
+    "isort (>=7.0.0,<8.0.0)",
+    "langchain (>=1.2.8,<2.0.0)",
+    "langchain-openai (>=1.1.7,<2.0.0)",
+    "langgraph (>=1.0.7,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
