@@ -11,4 +11,7 @@ class AnswerQuestion(BaseModel):
     search_queries: List[str] = Field(description='1-3 recommended search queries for further research')
 
 class ReflectionFromAnswer(AnswerQuestion):
-    refrences: List[str] = Field(description="A list of reputable references or sources cited in the answer, e.g., URLs or publication names.")
+    """Revise your original answer to your question."""
+    refrences: List[str] = Field(
+        description="Citations motivating your updated answer."
+        )

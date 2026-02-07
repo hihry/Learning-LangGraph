@@ -38,4 +38,3 @@ if __name__ == '__main__':
     input = HumanMessage(content="I want to make this tweet look professional"
                          "Bruh this is hilarious how trump is the US president, He hella is super funny and so stupid of scheming to occuping GreendLand by force I am laughing my ass off")
     build.invoke(input)
-
