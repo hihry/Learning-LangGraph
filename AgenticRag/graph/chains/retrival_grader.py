@@ -1,0 +1,27 @@
+from pydantic import Field, BaseModel
+from langchain_core.prompts import ChatPromptTemplate
+from model import llm
+
+class GradeDocuments(BaseModel):
+    """Binary score for relevance check on retrieved documents."""
+
+    binary_score: str = Field(
+        description="Binary relevance score for the document. Expected values: 'Yes' (relevant) or 'No' (not relevant)."
+    )
+
+
+structured_llm_grader=llm.with_structured_output(GradeDocuments)
+
+system = """You are a grader assessing relevance of a retrieved document to a user question. \n 
+    If the document contains keyword(s) or semantic meaning related to the question, grade it as relevant. \n
+    Give a binary score 'yes' or 'no' score to indicate whether the document is relevant to the question."""
+
+final=ChatPromptTemplate.from_messages(
+    [
+        ("system",system),
+        ("human", "Retrieved document: \n\n {document} \n\n User question: {question}"),
+    ]
+)
+
+relevant_retrive_chain=final | structured_llm_grader
+
