@@ -11,7 +11,7 @@ def Generate(state: GraphState) -> Dict[str, Any]:
     """
     print("---GENERATE---")
     question = state["question"]
-    documents = state("documents")
+    documents = state["documents"]
     # Prepare context string from documents
     context = "\n".join([
         d.page_content if hasattr(d, "page_content") else str(d)
@@ -21,5 +21,9 @@ def Generate(state: GraphState) -> Dict[str, Any]:
     generation = generate_chain.invoke({"question": question, "context": context})
     # Update state
     state["generation"] = generation
-    return state
+    return {
+        "question": question,
+        "document": documents,
+        "generation": generation,
+    }
     

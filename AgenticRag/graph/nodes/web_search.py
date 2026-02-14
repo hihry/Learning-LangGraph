@@ -4,9 +4,9 @@ load_dotenv()
 from typing import Any, Dict
 from graph.state import GraphState
 from langchain_core.documents import Document
-from langchain_tavily import tavily_search
+from langchain_community.tools.tavily_search import TavilySearchResults
 
-web_search_tool=tavily_search(max_results=3)
+web_search_tool = TavilySearchResults(max_results=3)
 
 def web_search(state: GraphState) -> Dict[str, Any]:
     print("---WEB SEARCH---")
