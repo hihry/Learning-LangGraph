@@ -44,15 +44,7 @@ def _grade_with_fallback(payload: dict) -> GradeDocuments:
             return result
         return GradeDocuments(binary_score=str(result.binary_score).lower())
     except Exception:
-        fallback_response = llm.invoke(
-            final.format_messages(question=question, document=document)
-        )
-        content = (
-            fallback_response.content
-            if hasattr(fallback_response, "content")
-            else str(fallback_response)
-        )
-        return GradeDocuments(binary_score=_extract_binary_score(content))
+        return GradeDocuments(binary_score="no")
 
 
 relevant_retrive_chain = RunnableLambda(_grade_with_fallback)

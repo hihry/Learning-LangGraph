@@ -13,8 +13,11 @@ def route_after_grading(state: GraphState) -> str:
 
 def route_question(state: GraphState) -> str:
 	question = state["question"]
-	result = question_router.invoke({"question": question})
-	return result.datasource
+	try:
+		result = question_router.invoke({"question": question})
+		return result.datasource
+	except Exception:
+		return WEB_SEARCH
 
 
 def route_after_generation(state: GraphState) -> str:
@@ -22,16 +25,19 @@ def route_after_generation(state: GraphState) -> str:
 	documents = state["documents"]
 	generation = state["generation"]
 
-	hallucination_score = hallucination_grader.invoke(
-		{"documents": documents, "generation": generation}
-	)
-	if not hallucination_score.binary_score:
-		return WEB_SEARCH
+	try:
+		hallucination_score = hallucination_grader.invoke(
+			{"documents": documents, "generation": generation}
+		)
+		if not hallucination_score.binary_score:
+			return WEB_SEARCH
 
-	answer_score = answer_grader.invoke(
-		{"question": question, "generation": generation}
-	)
-	return END if answer_score.binary_score else GENERATE
+		answer_score = answer_grader.invoke(
+			{"question": question, "generation": generation}
+		)
+		return END if answer_score.binary_score else GENERATE
+	except Exception:
+		return END
 
 
 builder = StateGraph(GraphState)

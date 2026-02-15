@@ -1,4 +1,4 @@
-from typing import TypedDict, List
+from typing import Any, List, TypedDict
 
 class GraphState(TypedDict):
     """
@@ -12,6 +12,6 @@ class GraphState(TypedDict):
     """
 
     question : str
-    web_search : str
+    web_search : bool
     generation : str
-    documents : List[str]
+    documents : List[Any]

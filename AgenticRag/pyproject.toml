@@ -5,7 +5,7 @@ description = ""
 authors = [
     {name = "hihry",email = "work.himanshu.r.v@gmail.com"}
 ]
-requires-python = ">=3.13,<4.0"
+requires-python = ">=3.10,<4.0"
 dependencies = [
     "beautifulsoup4 (>=4.14.3,<5.0.0)",
     "langchain (>=1.2.9,<2.0.0)",
@@ -19,7 +19,8 @@ dependencies = [
     "python-dotenv (>=1.2.1,<2.0.0)",
     "pytest (>=9.0.2,<10.0.0)",
     "langchain-openai (>=1.1.7,<2.0.0)",
-    "sentence-transformers (>=5.2.2,<6.0.0)"
+    "sentence-transformers (>=5.2.2,<6.0.0)",
+    "langchain-text-splitters (>=1.0.0,<2.0.0)"
 ]
 
 
